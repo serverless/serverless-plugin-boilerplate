@@ -7,7 +7,7 @@ You can install this Plugin in its current form into your Serverless Projects an
 
 The entire Serverless Framework is comprised of Plugins.  When you write your own Plugin, it's no hack, you're simply extending and customizing the Serverless Framework to suite your needs and build processes.
 
-A Serverless Plugin can do the following:
+**A Serverless Plugin can do the following:**
 
 * Add a Custom Action to the Serverless Framework which can be called via the command line, programatically via a handler, or both.
 * Add a Custom Action that overwrites a Core Action in the Serverless Framework.
