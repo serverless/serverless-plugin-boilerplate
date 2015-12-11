@@ -10,7 +10,7 @@ module.exports = function(root) {
    * ServerlessOptimizer
    */
 
-  class ServerlessOptimizer extends SPlugin {
+  class ServerlessPluginBoilerplate extends SPlugin {
 
     /**
      * Constructor
@@ -25,7 +25,7 @@ module.exports = function(root) {
      */
 
     static getName() {
-      return 'com.serverless.' + ServerlessOptimizer.name;
+      return 'com.serverless.' + ServerlessPluginBoilerplate.name;
     }
 
     /**
@@ -34,21 +34,43 @@ module.exports = function(root) {
 
     registerHooks() {
 
-      this.S.addHook(this._hook.bind(this), {
-        action: 'functionRunLambdaNodeJsPost',
+      this.S.addHook(this._hookPre.bind(this), {
+        action: 'functionRunLambdaNodeJs',
+        event:  'pre'
+      });
+
+      this.S.addHook(this._hookPost.bind(this), {
+        action: 'functionRunLambdaNodeJs',
         event:  'post'
       });
 
       return Promise.resolve();
     }
 
-    _hook(evt) {
+    _hookPre(evt) {
 
       let _this = this;
 
       return new BbPromise(function (resolve, reject) {
 
-        console.log("----------- HOOK RUN");
+        console.log('-------------------');
+        console.log('YOUR SERVERLESS PLUGIN BOILERPLATE\'S "PRE" HOOK HAS RUN');
+        console.log('-------------------');
+
+        return resolve(evt);
+
+      });
+    }
+
+    _hookPost(evt) {
+
+      let _this = this;
+
+      return new BbPromise(function (resolve, reject) {
+
+        console.log('-------------------');
+        console.log('YOUR SERVERLESS PLUGIN BOILERPLATE\'S "POST" HOOK HAS RUN');
+        console.log('-------------------');
 
         return resolve(evt);
 
@@ -57,6 +79,6 @@ module.exports = function(root) {
   }
 
   // Export Class
-  return ServerlessOptimizer;
+  return ServerlessPluginBoilerplate;
 
 };
