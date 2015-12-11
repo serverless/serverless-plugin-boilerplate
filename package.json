@@ -1,20 +1,20 @@
 {
-  "name": "serverless-optimizer",
+  "name": "serverless-plugin-boilerplate",
   "version": "0.0.1",
   "engines": {
     "node": ">=4.0"
   },
-  "description": "Serverless Optimizer - Optimize your Lambda functions for performance with this Serverless Framework Plugin",
+  "description": "Serverless Plugin Boilerplate - A boilerplate/template for writing a plugin for the Serverless Framework.",
   "author": "serverless.com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/serverless/serverless-optimizer"
+    "url": "https://github.com/serverless/serverless-plugin-boilerplate"
   },
   "keywords": [
-    "serverless optimize",
-    "serverless optimize plugin",
-    "serverless plugin",
+    "serverless plugin boilerplate",
+    "serverless plugin template",
+    "serverless plugin starter",
     "serverless framework plugin",
     "serverless applications",
     "serverless plugins",
@@ -35,5 +35,7 @@
     "chai": "^3.2.0",
     "mocha": "^2.2.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bluebird": "^3.0.6"
+  }
 }
