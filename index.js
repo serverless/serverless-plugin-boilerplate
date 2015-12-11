@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(root) {
+module.exports = function(serverlessPath) {
 
   const path     = require('path'),
-      SPlugin    = require(path.join(root, 'ServerlessPlugin')),
+      SPlugin    = require(path.join(serverlessPath, 'ServerlessPlugin')),
       BbPromise  = require('bluebird');
 
   /**
@@ -29,6 +29,27 @@ module.exports = function(root) {
     }
 
     /**
+     * Register Actions
+     */
+
+    registerActions() {
+
+      this.S.addAction(this._customAction.bind(this), {
+        handler:       'customAction',
+        description:   'A custom action from a custom plugin',
+        context:       'custom',
+        contextAction: 'run',
+        options:       [{
+          option:      'option',
+          shortcut:    'o',
+          description: 'test option 1'
+        }]
+      });
+
+      return Promise.resolve();
+    }
+
+    /**
      * Register Hooks
      */
 
@@ -47,6 +68,29 @@ module.exports = function(root) {
       return Promise.resolve();
     }
 
+    /**
+     * Your Custom Action
+     */
+
+    _customAction(evt) {
+
+      let _this = this;
+
+      return new BbPromise(function (resolve, reject) {
+
+        console.log('-------------------');
+        console.log('YOU JUST RAN YOUR CUSTOM ACTION!  YOU ARE IN CONTROL NOW...');
+        console.log('-------------------');
+
+        return resolve(evt);
+
+      });
+    }
+
+    /**
+     * Your Custom PRE Hook
+     */
+
     _hookPre(evt) {
 
       let _this = this;
@@ -54,13 +98,17 @@ module.exports = function(root) {
       return new BbPromise(function (resolve, reject) {
 
         console.log('-------------------');
-        console.log('YOUR SERVERLESS PLUGIN BOILERPLATE\'S "PRE" HOOK HAS RUN');
+        console.log('YOUR SERVERLESS PLUGIN BOILERPLATE\'S "PRE" HOOK HAS RUN BEFORE "FunctionRunLambdaNodeJs"');
         console.log('-------------------');
 
         return resolve(evt);
 
       });
     }
+
+    /**
+     * Your Custom POST Hook
+     */
 
     _hookPost(evt) {
 
@@ -69,7 +117,7 @@ module.exports = function(root) {
       return new BbPromise(function (resolve, reject) {
 
         console.log('-------------------');
-        console.log('YOUR SERVERLESS PLUGIN BOILERPLATE\'S "POST" HOOK HAS RUN');
+        console.log('YOUR SERVERLESS PLUGIN BOILERPLATE\'S "POST" HOOK HAS RUN AFTER "FunctionRunLambdaNodeJs"');
         console.log('-------------------');
 
         return resolve(evt);
