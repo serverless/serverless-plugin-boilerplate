@@ -1,11 +1,10 @@
 {
-  "name": "serverless",
-  "version": "0.0.10",
+  "name": "serverless-optimize",
+  "version": "0.0.1",
   "engines": {
     "node": ">=4.0"
   },
-  "preferGlobal": true,
-  "description": "The Serverless Application Framework Powered By Amazon Web Services - http://www.serverless.com",
+  "description": "Serverless Optimize - Optimize your Lambda functions for performance with this Serverless Framework Plugin",
   "author": "serverless.com",
   "license": "MIT",
   "repository": {
