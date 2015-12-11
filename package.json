@@ -1,15 +1,15 @@
 {
-  "name": "serverless-optimize",
+  "name": "serverless-optimizer",
   "version": "0.0.1",
   "engines": {
     "node": ">=4.0"
   },
-  "description": "Serverless Optimize - Optimize your Lambda functions for performance with this Serverless Framework Plugin",
+  "description": "Serverless Optimizer - Optimize your Lambda functions for performance with this Serverless Framework Plugin",
   "author": "serverless.com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/serverless/serverless-optimize"
+    "url": "https://github.com/serverless/serverless-optimizer"
   },
   "keywords": [
     "serverless optimize",
