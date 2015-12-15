@@ -11,18 +11,17 @@
  * - Good luck, serverless.com :)
  */
 
-module.exports = function(serverlessPath) {
+module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Class
 
-  const path     = require('path'),
-      fs         = require('fs'),
-      SPlugin    = require(path.join(serverlessPath, 'ServerlessPlugin')),// You can access modules in Serverless by following this convention.
-      BbPromise  = require('bluebird'); // Serverles uses Bluebird Promises and we recommend you do to because they are super helpful :)
+  const path    = require('path'),
+      fs        = require('fs'),
+      BbPromise = require('bluebird'); // Serverless uses Bluebird Promises and we recommend you do to because they provide more than your average Promise :)
 
   /**
    * ServerlessPluginBoierplate
    */
 
-  class ServerlessPluginBoilerplate extends SPlugin {
+  class ServerlessPluginBoilerplate extends sPlugin {
 
     /**
      * Constructor
