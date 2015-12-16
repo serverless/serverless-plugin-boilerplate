@@ -17,7 +17,7 @@ One plugin can do all of the above, and include several Hooks and Actions at onc
 
 * Plugins must be written in a Serverless Project, so create one specifically for authoring/testing plugins, or write your plugin in a Project you are working on.
 
-* Make sure you are using Serverless `v0.0.11` or greater and create a new project via `serverless project create`.
+* Make sure you are using Serverless `v0.0.13` or greater and create a new project via `serverless project create`.
 
 * cd into your new project and you will see a `plugins` folder available.  cd into the `plugins` folder and then run:
 
