@@ -15,44 +15,33 @@ One plugin can do all of the above, and include several Hooks and Actions at onc
 
 ###Get Started
 
-* Plugins must be written in a Serverless Project, so create one specifically for authoring/testing plugins, or write your plugin in a Project you are working on.
+* Plugins must be written in a Serverless Project, so create one specifically for authoring/testing plugins, or write your plugin in a Project you are working on, and make sure you are using Serverless `v0.1.0` or greater.
 
-* Make sure you are using Serverless `v0.1.0` or greater and create a new project via `serverless project create`.
+* cd into your Serverless Project, create a "plugins" folder and download this boilerplate project into it.  The "plugins" folder is specifically for developing plugins.  Give this boilerplate's folder a custom title.
 
-* cd into your new project and you will see a `plugins` folder available.  cd into the `plugins` folder and then run:
+* Update the boilerplate's `package.json` "name" property with your plugin's name.
 
- ```
- npm install serverless-plugin-boilerplate --save
- ```
+* cd into your new plugin and run:
+```
+npm link
+```
 
-* Once installed, open the 's-project.json' in your Project's root folder and add the plugin to the `plugins` property, like this:
+* cd into your Serverless Project's root folder and run:
+```
+npm link <yourpluginname>
+```
+
+* Lastly, open the 's-project.json' in your Project's root folder and add the plugin to the `plugins` property, like this:
 
 ```
 "plugins": [
-	{
-		"path": "serverless-plugin-boilerplate"
-	}
+	"my-custom-plugin"
 ]
 ```
 
 * Use the Serverless CLI within your project and run `serverless` to see the help screen.  You should now see an option entitled `custom` with a `run` Action.  This was added by the boilerplate plugin.
 
-* To start working on your own plugin, copy the `serverless-plugin-boilerplate` folder in `yourproject/plugins/node_modules`, create this folder `yourproject/plugins/custom` and paste it in there.  The `custom` folder is the designated place to write your plugins.  Be sure to change the folder name to something other than `serverless-plugin-boilerplate`.
-
-* Next, open the `s-project.json` in your Project's root folder, **remove the original boilerplate plugin** and replace it with the new name of your Plugin located in the `custom` folder, like this:
-
-```
-"plugins": [
-	{
-		"path": "your-custom-plugin"
-	}
-]
-```
-
-* You don't need to specify the `custom` folder, the Serverless Framework checks both the `node_modules` and `custom` folders for your plugin, just make sure you have a unique folder name.
-
-* Now, your custom plugin is installed and ready to worked on!  Read the comments in the `index.js` for further instructions.
-
+* Now, your custom plugin is installed and ready to be worked on!  Read the comments in the `index.js` for further instructions.
 
 If you would like to learn more about plugins, please check out our [Documentation](http://docs.serverless.com).
 

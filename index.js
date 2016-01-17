@@ -11,7 +11,7 @@
  *
  * - Setup:
  *    - Make a Serverless Project dedicated for plugin development, or use an existing Serverless Project
- *    - Make a "plugins" folder in the root of your Project with a subfolder titled after your plugin name with the suffix "-dev", like "myplugin-dev", and develop out of that.
+ *    - Make a "plugins" folder in the root of your Project and copy this codebase into it. Title it your custom plugin name with the suffix "-dev", like "myplugin-dev"
  *    - Run "npm link" in your plugin, then run "npm link myplugin" in the root of your project.
  *    - Start developing!
  *
