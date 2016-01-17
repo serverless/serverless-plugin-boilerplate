@@ -3,7 +3,7 @@ Serverless Plugin Boilerplate
 
 This is a starter project to help you build plugins for the Serverless Framework.  You can install this boilerplate Plugin in its current form into your Serverless Projects and it will run.  All that's left for you to do is write your custom logic.  We've filled this with useful comments to help you along your way.  Also, the entire Serverless Framework is comprised of Plugins.  When you write your own Plugin, it's no hack, you're simply extending and customizing the Serverless Framework to suite your needs and build processes :)
 
-**Note:** Serverless *v0.0.13* or higher is required.
+**Note:** Serverless *v0.1.0* or higher is required.
 
 **A Serverless Plugin can do the following:**
 
@@ -17,7 +17,7 @@ One plugin can do all of the above, and include several Hooks and Actions at onc
 
 * Plugins must be written in a Serverless Project, so create one specifically for authoring/testing plugins, or write your plugin in a Project you are working on.
 
-* Make sure you are using Serverless `v0.0.13` or greater and create a new project via `serverless project create`.
+* Make sure you are using Serverless `v0.1.0` or greater and create a new project via `serverless project create`.
 
 * cd into your new project and you will see a `plugins` folder available.  cd into the `plugins` folder and then run:
 

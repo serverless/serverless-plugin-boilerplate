@@ -8,10 +8,17 @@
  *    - Overwrite a Core Action that is included by default in the Serverless Framework.
  *    - Add a hook that fires before or after a Core Action or a Custom Action
  *    - All of the above at the same time :)
+ *
+ * - Setup:
+ *    - Make a Serverless Project dedicated for plugin development, or use an existing Serverless Project
+ *    - Make a "plugins" folder in the root of your Project with a subfolder titled after your plugin name with the suffix "-dev", like "myplugin-dev", and develop out of that.
+ *    - Run "npm link" in your plugin, then run "npm link myplugin" in the root of your project.
+ *    - Start developing!
+ *
  * - Good luck, serverless.com :)
  */
 
-module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Class
+module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPlugin Class
 
   const path    = require('path'),
       fs        = require('fs'),
@@ -21,15 +28,15 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
    * ServerlessPluginBoierplate
    */
 
-  class ServerlessPluginBoilerplate extends sPlugin {
+  class ServerlessPluginBoilerplate extends ServerlessPlugin {
 
     /**
      * Constructor
      * - Keep this and don't touch it unless you know what you're doing.
      */
 
-    constructor(S, config) {
-      super(S, config);
+    constructor(S) {
+      super(S);
     }
 
     /**
@@ -56,14 +63,21 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
         description:   'A custom action from a custom plugin',
         context:       'custom',
         contextAction: 'run',
-        options:       [{
+        options:       [{ // These must be specified in the CLI like this "-option true" or "-o true"
           option:      'option',
           shortcut:    'o',
           description: 'test option 1'
-        }]
+        }],
+        parameters: [ // Use paths when you multiple values need to be input (like an array).  Input looks like this: "serverless custom run module1/function1 module1/function2 module1/function3.  Serverless will automatically turn this into an array and attach it to evt.options within your plugin
+          {
+            parameter: 'paths',
+            description: 'One or multiple paths to your function',
+            position: '0->' // Can be: 0, 0-2, 0->  This tells Serverless which params are which.  3-> Means that number and infinite values after it.
+          }
+        ]
       });
 
-      return Promise.resolve();
+      return BbPromise.resolve();
     }
 
     /**
@@ -84,7 +98,7 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
         event:  'post'
       });
 
-      return Promise.resolve();
+      return BbPromise.resolve();
     }
 
     /**
@@ -101,11 +115,12 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
 
       return new BbPromise(function (resolve, reject) {
 
-        // console.log(evt) // Contains Action Specific data
-        // console.log(_this.S) // Contains Project Specific data
+        // console.log(evt)           // Contains Action Specific data
+        // console.log(_this.S)       // Contains Project Specific data
+        // console.log(_this.S.state) // Contains tons of useful methods for you to use in your plugin.  It's the official API for plugin developers.
 
         console.log('-------------------');
-        console.log('YOU JUST RAN YOUR CUSTOM ACTION!  YOU ARE IN CONTROL NOW...');
+        console.log('YOU JUST RAN YOUR CUSTOM ACTION, NICE!');
         console.log('-------------------');
 
         return resolve(evt);
@@ -126,9 +141,6 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
       let _this = this;
 
       return new BbPromise(function (resolve, reject) {
-
-        // console.log(evt) // Contains Action Specific data
-        // console.log(_this.S) // Contains Project Specific data
 
         console.log('-------------------');
         console.log('YOUR SERVERLESS PLUGIN\'S CUSTOM "PRE" HOOK HAS RUN BEFORE "FunctionRunLambdaNodeJs"');
@@ -153,9 +165,6 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
 
       return new BbPromise(function (resolve, reject) {
 
-        // console.log(evt) // Contains Action Specific data
-        // console.log(_this.S) // Contains Project Specific data
-
         console.log('-------------------');
         console.log('YOUR SERVERLESS PLUGIN\'S CUSTOM "POST" HOOK HAS RUN AFTER "FunctionRunLambdaNodeJs"');
         console.log('-------------------');
@@ -171,4 +180,4 @@ module.exports = function(sPlugin) { // Always pass in the ServerlessPlugin Clas
 
 };
 
-// Godspeed.
+// Godspeed!
