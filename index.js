@@ -18,7 +18,7 @@
  * - Good luck, serverless.com :)
  */
 
-module.exports = function(S) { // Always pass in the ServerlessPlugin Class
+module.exports = function(S) { // Always pass in 'S', the Serverless Class
 
   const path    = require('path'),
       fs        = require('fs'),
