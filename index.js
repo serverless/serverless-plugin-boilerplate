@@ -18,7 +18,7 @@
  * - Good luck, serverless.com :)
  */
 
-module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPlugin Class
+module.exports = function(S) { // Always pass in 'S', the Serverless Class
 
   const path    = require('path'),
       fs        = require('fs'),
@@ -28,7 +28,8 @@ module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPl
    * ServerlessPluginBoierplate
    */
 
-  class ServerlessPluginBoilerplate extends ServerlessPlugin {
+
+  class ServerlessPluginBoilerplate extends S.classes.Plugin {
 
     /**
      * Constructor
@@ -58,7 +59,7 @@ module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPl
 
     registerActions() {
 
-      this.S.addAction(this._customAction.bind(this), {
+      S.addAction(this._customAction.bind(this), {
         handler:       'customAction',
         description:   'A custom action from a custom plugin',
         context:       'custom',
@@ -88,13 +89,13 @@ module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPl
 
     registerHooks() {
 
-      this.S.addHook(this._hookPre.bind(this), {
-        action: 'functionRunLambdaNodeJs',
+      S.addHook(this._hookPre.bind(this), {
+        action: 'functionRun',
         event:  'pre'
       });
 
-      this.S.addHook(this._hookPost.bind(this), {
-        action: 'functionRunLambdaNodeJs',
+      S.addHook(this._hookPost.bind(this), {
+        action: 'functionRun',
         event:  'post'
       });
 
@@ -143,7 +144,7 @@ module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPl
       return new BbPromise(function (resolve, reject) {
 
         console.log('-------------------');
-        console.log('YOUR SERVERLESS PLUGIN\'S CUSTOM "PRE" HOOK HAS RUN BEFORE "FunctionRunLambdaNodeJs"');
+        console.log('YOUR SERVERLESS PLUGIN\'S CUSTOM "PRE" HOOK HAS RUN BEFORE "FunctionRun"');
         console.log('-------------------');
 
         return resolve(evt);
@@ -166,7 +167,7 @@ module.exports = function(ServerlessPlugin) { // Always pass in the ServerlessPl
       return new BbPromise(function (resolve, reject) {
 
         console.log('-------------------');
-        console.log('YOUR SERVERLESS PLUGIN\'S CUSTOM "POST" HOOK HAS RUN AFTER "FunctionRunLambdaNodeJs"');
+        console.log('YOUR SERVERLESS PLUGIN\'S CUSTOM "POST" HOOK HAS RUN AFTER "FunctionRun"');
         console.log('-------------------');
 
         return resolve(evt);
